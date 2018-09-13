@@ -1,18 +1,16 @@
 <!-- AdobeAnalytics code version: {{ version }}
 Copyright 1996-2017 Adobe, Inc. -->
-<script type="text/javascript" src="{{ js_file_location }}"></script>
-
+<script type="text/javascript" {% if js_file_location %} src="{{ js_file_location }}" {% endif %}></script>
 <script type="text/javascript"><!--
-
-    {{ formatted_vars|raw }}
-    /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
-    var s_code=s.t();if(s_code)document.write(s_code) //--></script>
+  {{ formatted_vars|raw }}
+  /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+  if(typeof s !== 'undefined'){var s_code=s.t();if(s_code)document.write(s_code)} //--></script>
 <script type="text/javascript"><!--
-    if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+  if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
     //--></script>
 {% if image_location %}
-<noscript><img src="{{ image_location }}" height="1" width="1" />
-</noscript>
+  <noscript><img src="{{ image_location }}" height="1" width="1" />
+  </noscript>
 {% endif %}
 <!--/DO NOT REMOVE/-->
 <!-- End AdobeAnalytics code version: {{ version }} -->
