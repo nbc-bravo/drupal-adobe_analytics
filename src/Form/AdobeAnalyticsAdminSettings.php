@@ -25,7 +25,6 @@ class AdobeAnalyticsAdminSettings extends ConfigFormBase {
    *   Gets the configuration names that will be editable
    */
   protected function getEditableConfigNames() {
-
     return ['adobe_analytics.settings'];
   }
 
@@ -45,20 +44,22 @@ class AdobeAnalyticsAdminSettings extends ConfigFormBase {
 
     $form['general']['js_file_location'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Complete path to AdobeAnalytics Javascript file'),
+      '#title' => $this->t('Complete path to Adobe Analytics Javascript file'),
       '#default_value' => $config->get('js_file_location'),
-    ];
-
-    $form['general']['image_file_location'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Complete path to AdobeAnalytics Image file'),
-      '#default_value' => $config->get('image_file_location'),
+      '#required' => TRUE,
     ];
 
     $form['general']['version'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('AdobeAnalytics version (used by adobe_analytics for debugging)'),
+      '#title' => $this->t('Adobe Analytics version (used by adobe_analytics for debugging)'),
       '#default_value' => $config->get('version'),
+      '#required' => TRUE,
+    ];
+
+    $form['general']['image_file_location'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Complete path to Adobe Analytics Image file'),
+      '#default_value' => $config->get('image_file_location'),
     ];
 
     $form['general']['token_cache_lifetime'] = [
@@ -66,7 +67,7 @@ class AdobeAnalyticsAdminSettings extends ConfigFormBase {
       '#title' => $this->t('Token cache lifetime'),
       '#default_value' => $config->get('token_cache_lifetime'),
       '#description' => $this->t(
-        'The time, in seconds, that the AdobeAnalytics token
+        'The time, in seconds, that the Adobe Analytics token
          cache will be valid for. The token cache will always be cleared at the
          next system cron run after this time period, or when this form is saved.'
       ),

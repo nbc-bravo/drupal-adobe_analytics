@@ -1,4 +1,22 @@
 services:
-  adobe_analytics.adobe_analytics_helper:
-    class: Drupal\adobe_analytics\AdobeAnalyticsHelper
-    arguments: ['@config.factory', '@current_route_match', '@current_user', '@module_handler', '@router.admin_context', '@token']
+  adobe_analytics.variables_factory:
+    class: Drupal\adobe_analytics\VariablesFactory
+    arguments: ['@config.factory', '@module_handler', '@logger.channel.default']
+  adobe_analytics.variables:
+    class: Drupal\adobe_analytics\VariablesInterface
+    factory: adobe_analytics.variables_factory:load
+  adobe_analytics.variable_formatter:
+    class: Drupal\adobe_analytics\VariableFormatter
+    arguments: ['@adobe_analytics.variables', '@entity_field.manager', '@current_route_match', '@path.current', '@entity_type.manager', '@token']
+
+  adobe_analytics.admin_context:
+    class: Drupal\adobe_analytics\TrackingMatcher\AdminContext
+    arguments: ['@router.admin_context']
+    tags:
+    - { name: 'adobe_analytics_tracking_matcher' }
+
+  adobe_analytics.role_context:
+    class: Drupal\adobe_analytics\TrackingMatcher\RoleContext
+    arguments: ['@config.factory', '@current_user']
+    tags:
+    - { name: 'adobe_analytics_tracking_matcher' }

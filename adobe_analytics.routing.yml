@@ -1,5 +1,5 @@
 adobe_analytics.settings:
-  path: '/admin/config/system/adobeanalytics'
+  path: '/admin/config/search/adobeanalytics'
   defaults:
     _title: 'Adobe Analytics'
     _form: '\Drupal\adobe_analytics\Form\AdobeAnalyticsAdminSettings'

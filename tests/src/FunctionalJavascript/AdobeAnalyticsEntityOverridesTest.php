@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\adobe_analytics\Functional;
+namespace Drupal\Tests\adobe_analytics\FunctionalJavascript;
 
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
@@ -95,6 +95,8 @@ class AdobeAnalyticsEntityOverridesTest extends JavascriptTestBase {
   public function testEntityOverrides() {
     // By default, global variables and snippet are shown.
     \Drupal::configFactory()->getEditable('adobe_analytics.settings')
+      ->set('js_file_location', 'http://www.example.com/js/s_code_remote_h.js')
+      ->set('version', 'H.20.3.')
       ->set('codesnippet', 'var globalSnippet = "baz";')
       ->set('extra_variables', [
         [
@@ -102,6 +104,12 @@ class AdobeAnalyticsEntityOverridesTest extends JavascriptTestBase {
           'value' => 'extraVariableValue',
         ],
       ])
+      ->set('track_roles', [
+        'anonymous' => '0',
+        'authenticated' => '0',
+        'administrator' => '0',
+      ])
+      ->set('role_tracking_type', 'exclusive')
       ->save();
 
     $edit = [
@@ -125,4 +133,5 @@ class AdobeAnalyticsEntityOverridesTest extends JavascriptTestBase {
     $this->assertSession()->responseNotContains('extraVariableName');
     $this->assertSession()->responseContains('customVar');
   }
+
 }

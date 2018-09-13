@@ -18,8 +18,6 @@ use Drupal\Core\Url;
  */
 class AdobeAnalyticsWidget extends WidgetBase {
 
-
-
   /**
    * {@inheritdoc}
    */

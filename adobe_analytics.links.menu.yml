@@ -1,6 +1,6 @@
 adobe_analytics.admin:
   title: 'Adobe Analytics'
   description: 'Configure the settings used to integrate Adobe Analytics.'
-  parent: system.admin_config_system
+  parent: system.admin_config_search
   route_name: adobe_analytics.settings
   weight: 100

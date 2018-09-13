@@ -71,7 +71,7 @@ class AdobeAnalyticsGeneralTest extends BrowserTestBase {
       'variables[0][name]' => $name,
       'variables[0][value]' => $value,
     ];
-    $this->drupalPostForm('admin/config/system/adobeanalytics', $edit, 'Save configuration');
+    $this->drupalPostForm('admin/config/search/adobeanalytics', $edit, 'Save configuration');
     $this->drupalGet('node');
     $this->assertSession()->responseContains($name . '="' . $value . '";');
   }
@@ -84,7 +84,7 @@ class AdobeAnalyticsGeneralTest extends BrowserTestBase {
       'variables[0][name]' => $name,
       'variables[0][value]' => $value,
     ];
-    $this->drupalPostForm('admin/config/system/adobeanalytics', $edit, 'Save configuration');
+    $this->drupalPostForm('admin/config/search/adobeanalytics', $edit, 'Save configuration');
     $this->assertSession()->responseContains('This is not a valid variable name. It must start with a letter, $ or _ and cannot contain spaces.');
   }
 
