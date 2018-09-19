@@ -409,14 +409,22 @@ class VariableFormatter {
    * @param string $entity_type
    *   The entity type to extract.
    *
-   * @return \Drupal\Core\Entity\EntityInterface
+   * @return \Drupal\Core\Entity\EntityInterface|false
    *   The extracted entity, or FALSE if one could not be loaded.
    */
   private function extractTokenEntityFromPath(string $entity_type) {
     // Return current entity path and parameters.
     $path = $this->currentPathStack->getPath();
 
-    $params = Url::fromUserInput($path)->getRouteParameters();
+    $url = Url::fromUserInput($path);
+
+    // If the URL is not routed, it is impossible to be an entity path (and it
+    // cannot have any route parameters).
+    if (!$url->isRouted()) {
+      return FALSE;
+    }
+
+    $params = $url->getRouteParameters();
     $entity = FALSE;
 
     // Set token through token replace.

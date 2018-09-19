@@ -97,6 +97,23 @@ class AdobeAnalyticsGeneralTest extends BrowserTestBase {
   }
 
   /**
+   * Tests 404 pages when trying to extract extract entity tokens.
+   */
+  public function test404WithToken() {
+    \Drupal::configFactory()->getEditable('adobe_analytics.settings')
+      ->set('extra_variables', [
+        [
+          'name' => 's.pageName',
+          'value' => '[current-page:title]',
+        ],
+      ])
+      ->save();
+
+    $this->drupalGet('404');
+    $this->assertTrackingCode();
+  }
+
+  /**
    * Tests the logic to save and validate variables.
    */
   public function testVariables() {
